@@ -11,7 +11,7 @@
 | first_name           | string  | null: false |
 | family_name_furigana | string  | null: false |
 | first_name_furigana  | string  | null: false |
-| date_of_birth        | integer | null: false |
+| date_of_birth        | date    | null: false |
 
 ### Association
 
@@ -22,14 +22,14 @@
 
 | Column       | Type       | Options                        |
 | ------------ | ---------- | ------------------------------ |
-| image        | string     | null: false                    |
 | name         | string     | null: false                    |
-| detail       | string     | null: false                    |
+| detail       | text       | null: false                    |
 | category     | string     | null: false                    |
 | status       | string     | null: false                    |
 | cost_burden  | string     | null: false                    |
+| ship_from    | string     | null: false                    |
 | shipping_day | string     | null: false                    |
-| user_id      | references | null: false, foreign_key: true |
+| user         | references | null: false, foreign_key: true |
 
 ### Association
 
@@ -42,7 +42,6 @@
 | ------------------ | ---------- | ------------------------------ |
 | user               | references | null: false, foreign_key: true |
 | item               | references | null: false, foreign_key: true |
-| shipping_address   | references | null: false, foreign_key: true |
 
 ### Association
 
@@ -55,12 +54,12 @@
 | Column           | Type       | Options                        |
 | ---------------- | ---------- | ------------------------------ |
 | postal_code      | string     | null: false                    |
-| prefecture       | string     | null: false                    |
+| prefecture       | integer    | null: false                    |
 | city             | string     | null: false                    |
 | block            | string     | null: false                    |
 | building         | string     |                                |
 | telephone_number | string     | null: false                    |
-| order_id         | references | null: false, foreign_key: true |
+| order            | references | null: false, foreign_key: true |
 
 ### Association
 

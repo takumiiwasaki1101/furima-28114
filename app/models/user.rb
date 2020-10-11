@@ -8,7 +8,7 @@ class User < ApplicationRecord
   FULL_WIDTH_KANA_REGEX = /\A[ァ-ン]+\z/i.freeze
   FULL_WIDTH_REGEX = /\A[ぁ-んァ-ン一-龥]+\z/i.freeze
 
-  validates_format_of :encrypted_password, with: PASSWORD_REGEX, message: 'Include both letters and numbers'        
+  validates_format_of :password, with: PASSWORD_REGEX, message: 'Include both letters and numbers'        
   validates :nickname,             presence: true
   validates :family_name,          presence: true
     validates_format_of :family_name, with: FULL_WIDTH_REGEX, message: 'Full-width characters'        

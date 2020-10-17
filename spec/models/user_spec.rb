@@ -77,6 +77,23 @@ RSpec.describe User, type: :model do
       end
       # /空では登録できないことを確認
 
+      # emailに@が存在しない場合登録できないことを確認
+      it 'emailに@が存在しない場合登録できないこと' do
+        @user.email = "hoge"
+        @user.valid?
+        expect(@user.errors.full_messages).to include('Email is invalid')
+      end
+      # /emailに@が存在しない場合登録できないことを確認
+
+      # 重複したemailが存在する場合登録できないことを確認
+      it '重複したemailが存在する場合登録できないこと' do
+        @user.save
+        another_user = FactoryBot.build(:user, email: @user.email)
+        another_user.valid?
+        expect(another_user.errors.full_messages).to include('Email has already been taken')
+      end
+      # /重複したemailが存在する場合登録できないことを確認
+      
       # パスワードの文字数制限を確認
       it 'passwordが5文字以下であれば登録できないこと' do
         @user.password = 'T1234'
@@ -110,15 +127,6 @@ RSpec.describe User, type: :model do
         expect(@user.errors.full_messages).to include('Password Include both letters and numbers')
       end
       # /パスワードは半角英数字混合が必須であることを確認
-
-      # 重複したemailが存在する場合登録できないことを確認
-      it '重複したemailが存在する場合登録できないこと' do
-        @user.save
-        another_user = FactoryBot.build(:user, email: @user.email)
-        another_user.valid?
-        expect(another_user.errors.full_messages).to include('Email has already been taken')
-      end
-      # /重複したemailが存在する場合登録できないことを確認
 
       # 名前は全角入力（漢字・ひらがな・カタカナ）が必須であることを確認
       it 'family_nameが半角入力であれば登録できないこと' do

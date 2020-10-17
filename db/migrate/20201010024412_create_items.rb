@@ -3,8 +3,8 @@ class CreateItems < ActiveRecord::Migration[6.0]
     create_table :items do |t|
       t.string     :name,            null:false
       # 商品一覧表示機能作成時のみitemモデルを一時的に簡略化
-      # t.text       :detail,          null:false
-      # t.integer    :category_id,     null:false
+      t.text       :detail,          null:false
+      t.integer    :category_id,     null:false
       # t.integer    :status_id,       null:false
       # t.integer    :cost_burden_id,  null:false
       # t.integer    :ship_from_id,    null:false

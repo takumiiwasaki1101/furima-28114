@@ -6,14 +6,18 @@ class ItemsController < ApplicationController
   end
 
   def new
-
+    @item = Item.new
   end
 
   def create
-    
+    @item = Item.create(params)
   end
 
   private
+
+  def params
+    params.require(item).permit()
+  end 
 
   def move_to_new_user_session_path
     unless user_signed_in?

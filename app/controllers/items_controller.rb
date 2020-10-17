@@ -10,13 +10,13 @@ class ItemsController < ApplicationController
   end
 
   def create
-    @item = Item.create(params)
+    Item.create(item_params)
   end
 
   private
 
-  def params
-    params.require(item).permit()
+  def item_params
+    params.require(:item).permit(:name,:detail,:category_id,:status_id,:cost_burden_id,:ship_from_id,:shipping_day_id,:price)
   end 
 
   def move_to_new_user_session_path

@@ -116,5 +116,60 @@ RSpec.describe User, type: :model do
       expect(another_user.errors.full_messages).to include('Email has already been taken')
     end
     # /重複したemailが存在する場合登録できないことを確認
+
+    # 名前は全角入力（漢字・ひらがな・カタカナ）が必須であることを確認
+    it 'family_nameとfirst_nameが全角入力（漢字・ひらがな・カタカナ）であれば登録できること' do
+      @user.family_name = '山だ'
+      @user.first_name = 'タ郎'
+      @user.valid?
+      expect(@user).to be_valid
+    end
+
+    it 'family_nameが半角入力であれば登録できないこと' do
+      @user.family_name = 'ﾔﾏﾀﾞ'
+      @user.valid?
+      expect(@user.errors.full_messages).to include('Family name Full-width characters')
+    end
+
+    it 'first_nameが半角入力であれば登録できないこと' do
+      @user.first_name = 'ﾀﾛｳ'
+      @user.valid?
+      expect(@user.errors.full_messages).to include('First name Full-width characters')
+    end
+    # /名前は全角入力（漢字・ひらがな・カタカナ）が必須であることを確認
+
+    # フリガナは全角入力（カタカナ）が必須であることを確認
+    it 'family_name_furiganaとfirst_name_furiganaが全角入力（カタカナ）であれば登録できること' do
+      @user.family_name_furigana = 'ヤマダ'
+      @user.first_name_furigana = 'タロウ'
+      @user.valid?
+      expect(@user).to be_valid
+    end
+
+    it 'family_name_furiganaが半角入力であれば登録できないこと' do
+      @user.family_name_furigana = 'ﾔﾏﾀﾞ'
+      @user.valid?
+      expect(@user.errors.full_messages).to include('Family name furigana Full-width katakana characters')
+    end
+
+    it 'family_name_furiganaが全角入力（漢字・ひらがな）であっても登録できないこと' do
+      @user.family_name_furigana = 'やま田'
+      @user.valid?
+      expect(@user.errors.full_messages).to include('Family name furigana Full-width katakana characters')
+    end
+
+    it 'first_name_furiganaが半角入力であれば登録できないこと' do
+      @user.first_name_furigana = 'ﾀﾛｳ'
+      @user.valid?
+      expect(@user.errors.full_messages).to include('First name furigana Full-width katakana characters')
+    end
+
+    it 'first_name_furiganaが全角入力（漢字・ひらがな）であっても登録できないこと' do
+      @user.first_name_furigana = 'た郎'
+      @user.valid?
+      expect(@user.errors.full_messages).to include('First name furigana Full-width katakana characters')
+    end
+
+    # フリガナは全角入力（カタカナ）が必須であることを確認
   end
 end

@@ -19,5 +19,8 @@ class User < ApplicationRecord
     validates :first_name_furigana 
     validates_format_of :first_name_furigana, with: FULL_WIDTH_KANA_REGEX, message: 'Full-width katakana characters'
     validates :date_of_birth
+
+  # Association
+  has_many :items
   end
 end

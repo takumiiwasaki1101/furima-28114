@@ -10,7 +10,7 @@ class ItemsController < ApplicationController
   end
 
   def create
-    Item.create(item_params)
+    @item = Item.create(item_params)
   end
 
   private

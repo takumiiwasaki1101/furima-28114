@@ -16,7 +16,7 @@ class ItemsController < ApplicationController
   private
 
   def item_params
-    params.require(:item).permit(:image,:name,:detail,:category_id,:status_id,:cost_burden_id,:ship_from_id,:shipping_day_id,:price)
+    params.require(:item).permit(:image,:name,:detail,:category_id,:status_id,:cost_burden_id,:ship_from_id,:shipping_day_id,:price).merge(user_id: current_user.id)
   end 
 
   def move_to_new_user_session_path

@@ -10,13 +10,12 @@ class ItemsController < ApplicationController
   end
 
   def create
-    @item = Item.new(item_params)
- 
+    @item = Item.new(item_params) 
     if @item.valid?
       @item.save  # バリデーションをクリアした時
       return redirect_to root_path
     else
-      render "new"    # バリデーションに弾かれた時
+      render action: "new"    # バリデーションに弾かれた時
     end
   end
 

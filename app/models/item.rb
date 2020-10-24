@@ -5,6 +5,7 @@ class Item < ApplicationRecord
 
   # Validation
   with_options presence: true do
+    validates :image
     validates :name
     validates :detail
     validates :category_id, numericality: { other_than: 0}

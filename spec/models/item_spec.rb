@@ -110,11 +110,18 @@ RSpec.describe Item, type: :model do
       # idが0の場合は登録できないことを確認
 
       # 範囲外の価格では登録できないことを確認
-        it 'priceが¥300~¥9,999,999の間でないと登録できないこと' do
-          @item.price = 200
+        it 'priceが¥300未満だと登録できないこと' do
+          @item.price = 299
           @item.valid?
           expect(@item.errors.full_messages).to include("Price Out of setting range")
         end
+
+        it 'priceが¥10,000,000以上だと登録できないこと' do
+          @item.price = 10000000
+          @item.valid?
+          expect(@item.errors.full_messages).to include("Price Out of setting range")
+        end
+
       # 範囲外の価格では登録できないことを確認
 
       # 販売価格は半角数字のみ保存可能であることを確認

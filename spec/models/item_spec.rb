@@ -46,6 +46,12 @@ RSpec.describe Item, type: :model do
           expect(@item.errors.full_messages).to include("Status can't be blank")
         end
 
+        it 'cost_burden_idが空では登録できないこと' do
+          @item.cost_burden_id = nil
+          @item.valid?
+          expect(@item.errors.full_messages).to include("Cost burden can't be blank")
+        end
+
         it 'ship_from_idが空では登録できないこと' do
           @item.ship_from_id = nil
           @item.valid?
@@ -64,6 +70,44 @@ RSpec.describe Item, type: :model do
           expect(@item.errors.full_messages).to include("Price can't be blank")
         end
       # 空では登録できないことを確認
+
+      # idが0の場合は登録できないことを確認
+      it 'category_idが0では登録できないこと' do
+        @item.category_id = 0
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Category Select")
+      end
+
+      it 'status_idが0では登録できないこと' do
+        @item.status_id = 0
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Status Select")
+      end
+
+      it 'cost_burden_idが0では登録できないこと' do
+        @item.cost_burden_id = 0
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Cost burden Select")
+      end
+
+      it 'ship_from_idが0では登録できないこと' do
+        @item.ship_from_id = 0
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Ship from Select")
+      end
+
+      it 'shipping_day_idが0では登録できないこと' do
+        @item.shipping_day_id = 0
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Shipping day Select")
+      end
+
+      it 'priceが空では登録できないこと' do
+        @item.price = nil
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Price can't be blank")
+      end
+      # idが0の場合は登録できないことを確認
 
       # 範囲外の価格では登録できないことを確認
         it 'priceが¥300~¥9,999,999の間でないと登録できないこと' do

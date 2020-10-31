@@ -3,7 +3,7 @@ class Item < ApplicationRecord
   belongs_to_active_hash :category
   belongs_to_active_hash :status
   belongs_to_active_hash :cost_burden
-  belongs_to_active_hash :prefecture
+  belongs_to_active_hash :ship_from
   belongs_to_active_hash :shipping_day
   
   # Association

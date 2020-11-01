@@ -1,6 +1,7 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
-  before_action :set_item, only: [:show, :edit, :update]
+  before_action :set_item, only: [:show, :edit, :update, :destroy]
+  before_action :move_to_index, only: [:edit, :update, :destroy]
 
   def index
     @items = Item.all.order('created_at DESC')
@@ -24,7 +25,6 @@ class ItemsController < ApplicationController
   end
 
   def edit
-    move_to_index
   end
 
   def update
@@ -33,6 +33,10 @@ class ItemsController < ApplicationController
     else
       render action: 'edit'    # バリデーションに弾かれた時
     end
+  end
+
+  def destroy
+    @item.destroy
   end
   
 

@@ -1,6 +1,7 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
-  before_action :set_item, only: [:show, :edit, :update]
+  before_action :set_item, only: [:show, :edit, :update, :destroy]
+  before_action :move_to_index, only: [:edit, :update, :destroy]
 
   def index
     @items = Item.all.order('created_at DESC')
@@ -16,7 +17,7 @@ class ItemsController < ApplicationController
       @item.save  # バリデーションをクリアした時
       redirect_to root_path
     else
-      render action: 'new'    # バリデーションに弾かれた時
+      render action: 'new' # バリデーションに弾かれた時
     end
   end
 
@@ -24,7 +25,6 @@ class ItemsController < ApplicationController
   end
 
   def edit
-    move_to_index
   end
 
   def update
@@ -34,7 +34,10 @@ class ItemsController < ApplicationController
       render action: 'edit'    # バリデーションに弾かれた時
     end
   end
-  
+
+  def destroy
+    redirect_to root_path if @item.destroy
+  end
 
   private
 
@@ -47,8 +50,6 @@ class ItemsController < ApplicationController
   end
 
   def move_to_index
-    unless current_user.id == @item.user_id
-      redirect_to action: :index
-    end
+    redirect_to action: :index unless current_user.id == @item.user_id
   end
 end

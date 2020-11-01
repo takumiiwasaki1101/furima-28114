@@ -25,6 +25,7 @@ class ItemsController < ApplicationController
 
   def edit
     @item = Item.find(params[:id])
+    move_to_index
   end
 
   def update
@@ -41,5 +42,11 @@ class ItemsController < ApplicationController
 
   def item_params
     params.require(:item).permit(:image, :name, :detail, :category_id, :status_id, :cost_burden_id, :ship_from_id, :shipping_day_id, :price).merge(user_id: current_user.id)
+  end
+
+  def move_to_index
+    unless current_user.id == @item.user_id
+      redirect_to action: :index
+    end
   end
 end

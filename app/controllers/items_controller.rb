@@ -1,5 +1,5 @@
 class ItemsController < ApplicationController
-  before_action :authenticate_user!, except: :index
+  before_action :authenticate_user!, except: [:index, :show]
 
   def index
     @items = Item.all.order('created_at DESC')
@@ -10,18 +10,22 @@ class ItemsController < ApplicationController
   end
 
   def create
-    @item = Item.new(item_params) 
+    @item = Item.new(item_params)
     if @item.valid?
       @item.save  # バリデーションをクリアした時
-      return redirect_to root_path
+      redirect_to root_path
     else
-      render action: "new"    # バリデーションに弾かれた時
+      render action: 'new'    # バリデーションに弾かれた時
     end
+  end
+
+  def show
+    @item = Item.find(params[:id])
   end
 
   private
 
   def item_params
-    params.require(:item).permit(:image,:name,:detail,:category_id,:status_id,:cost_burden_id,:ship_from_id,:shipping_day_id,:price).merge(user_id: current_user.id)
-  end 
+    params.require(:item).permit(:image, :name, :detail, :category_id, :status_id, :cost_burden_id, :ship_from_id, :shipping_day_id, :price).merge(user_id: current_user.id)
+  end
 end

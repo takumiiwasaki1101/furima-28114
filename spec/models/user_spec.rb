@@ -79,7 +79,7 @@ RSpec.describe User, type: :model do
 
       # emailに@が存在しない場合登録できないことを確認
       it 'emailに@が存在しない場合登録できないこと' do
-        @user.email = "hoge"
+        @user.email = 'hoge'
         @user.valid?
         expect(@user.errors.full_messages).to include('Email is invalid')
       end
@@ -93,7 +93,7 @@ RSpec.describe User, type: :model do
         expect(another_user.errors.full_messages).to include('Email has already been taken')
       end
       # /重複したemailが存在する場合登録できないことを確認
-      
+
       # パスワードの文字数制限を確認
       it 'passwordが5文字以下であれば登録できないこと' do
         @user.password = 'T1234'

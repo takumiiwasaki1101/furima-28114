@@ -18,4 +18,9 @@ class Transaction
     validates :prefecture_id
   end
 
-end
+  def save
+    # オーダー情報の保存
+    order = Order.create(user_id: current_user.id, item_id: params[:item_id])
+    # 配送先住所の保存
+    ShippingAddress.create(postal_code: postal_code, prefecture: prefecture, city: city, block: block, building: building, telephone_number: telephone_number, order_id :order.id)
+  end

@@ -5,13 +5,13 @@ class OrdersController < ApplicationController
   end
 
   def create
-    @order = Order.new(order_params)
-    # if @item.valid?
-    #   @item.save  # バリデーションをクリアした時
-    #   redirect_to root_path
-    # else
-    #   render action: 'new' # バリデーションに弾かれた時
-    # end
+    @order = Transaction.new(order_params)
+    @order.save
   end
 
+  private
+
+  def order_params
+    params.require(:transaction).permit(:user_id, :item_id, :postal_code, :prefecture, :city, :block, :building, :telephone_number, :order_id)
+  end
 end

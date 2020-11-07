@@ -28,7 +28,7 @@ class OrdersController < ApplicationController
     @item = Item.find(params[:item_id])
     if @item.order
       redirect_to root_path
-    else current_user.id ==  @item.user_id
+    elsif current_user.id ==  @item.user_id
       redirect_to root_path
     end
   end

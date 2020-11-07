@@ -17,6 +17,9 @@ class Transaction
     validates :prefecture_id
   end
 
+  ## postal_codeに関するバリデーション
+  validates :postal_code, format: {with: /\A[0-9]{3}-[0-9]{4}\z/, message: "is invalid. Include hyphen(-)"}
+
   def save
     # オーダー情報の保存
     order = Order.create(user_id: user_id, item_id: item_id)

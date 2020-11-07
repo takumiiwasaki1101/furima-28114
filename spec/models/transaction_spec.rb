@@ -43,7 +43,17 @@ RSpec.describe Transaction, type: :model do
         @transaction.valid?
         expect(@transaction.errors.full_messages).to include("Telephone number can't be blank")
       end
-      ## 空では登録できないことを確認
+      # 空では登録できないことを確認
+
+      # idが0の場合は登録できないことを確認
+      it 'prefecture_idが0では登録できないこと' do
+        @transaction.prefecture_id = 0
+        @transaction.valid?
+        expect(@transaction.errors.full_messages).to include('Prefecture Select')
+      end
+      # idが0の場合は登録できないことを確認
+
+      # 郵便番号にはハイフンが必要であること
 
     end
   end

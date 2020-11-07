@@ -1,6 +1,6 @@
 class Transaction
   include ActiveModel::Model
-  attr_accessor :user_id, :item_id, :postal_code, :prefecture, :city, :block, :building, :telephone_number, :order_id
+  attr_accessor :user_id, :item_id, :postal_code, :prefecture_id, :city, :block, :building, :telephone_number, :order_id
 
   # Validation
   ## 入力必須に関するvalidation
@@ -19,8 +19,8 @@ class Transaction
 
   def save
     # オーダー情報の保存
-    order = Order.create(user_id: current_user.id, item_id: @item.id)
+    order = Order.create(user_id: user_id, item_id: item_id)
     # 配送先住所の保存
-    ShippingAddress.create(postal_code: postal_code, prefecture: prefecture, city: city, block: block, building: building, telephone_number: telephone_number, order_id: order.id)
+    ShippingAddress.create(postal_code: postal_code, prefecture_id: prefecture_id, city: city, block: block, building: building, telephone_number: telephone_number, order_id: order.id)
   end
 end

@@ -5,6 +5,7 @@ class Transaction
   # Validation
   ## 入力必須に関するvalidation
   with_options presence: true do
+    validates :token
     validates :postal_code
     validates :prefecture_id
     validates :city

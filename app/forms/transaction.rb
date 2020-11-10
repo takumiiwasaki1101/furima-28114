@@ -1,6 +1,6 @@
 class Transaction
   include ActiveModel::Model
-  attr_accessor :token, :user_id, :item_id, :postal_code, :prefecture_id, :city, :block, :building, :telephone_number, :order_id
+  attr_accessor :token, :price, :user_id, :item_id, :postal_code, :prefecture_id, :city, :block, :building, :telephone_number, :order_id
 
   # Validation
   ## 入力必須に関するvalidation

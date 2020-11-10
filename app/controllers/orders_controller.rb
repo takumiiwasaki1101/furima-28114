@@ -10,9 +10,14 @@ class OrdersController < ApplicationController
   def create
     @item = Item.find(params[:item_id])
     @transaction = Transaction.new(order_params)
-    binding.pry
     if @transaction.valid?
-        @transaction.save
+      Payjp.api_key = "sk_test_5e659af50d7629dc022726e3"
+      Payjp::Charge.create(
+        amount: order_params[:price],
+        card: order_params[:token],
+        currency: "jpy"
+      )
+      @transaction.save
         redirect_to root_path
       else
         render action: "index"

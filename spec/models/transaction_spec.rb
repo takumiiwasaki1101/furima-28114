@@ -76,7 +76,6 @@ RSpec.describe Transaction, type: :model do
       it 'telephone_numberが12桁以上では登録できないこと' do
         @transaction.telephone_number = "000012345678"
         @transaction.valid?
-        binding.pry
         expect(@transaction.errors.full_messages).to include("Telephone number is too long (maximum is 11 characters)")
       end
       # 電話番号は11桁以内であること

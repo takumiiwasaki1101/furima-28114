@@ -65,6 +65,13 @@ RSpec.describe Transaction, type: :model do
       # idが0の場合は登録できないことを確認
 
       # 郵便番号にはハイフンが必要であること
+      it 'postal_codeにハイフンがないと登録できないこと' do
+        @transaction.postal_code = "1234567"
+        @transaction.valid?
+        expect(@transaction.errors.full_messages).to include('Postal code is invalid. Include hyphen(-)')
+      end
+
+      # 郵便番号にはハイフンが必要であること
     end
   end
 end

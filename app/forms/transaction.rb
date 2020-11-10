@@ -10,7 +10,7 @@ class Transaction
     validates :prefecture_id
     validates :city
     validates :block
-    validates :telephone_number,numericality: { with: /\A[0-9]+\z/, message: 'Half-width number' }
+    validates :telephone_number, numericality: { with: /\A[0-9]+\z/, message: 'Half-width number' }
   end
 
   ## id0以外での入力を必須とするvalidation
@@ -19,7 +19,7 @@ class Transaction
   end
 
   ## postal_codeに関するバリデーション
-  validates :postal_code, format: {with: /\A[0-9]{3}-[0-9]{4}\z/, message: "is invalid. Include hyphen(-)"}
+  validates :postal_code, format: { with: /\A[0-9]{3}-[0-9]{4}\z/, message: 'is invalid. Include hyphen(-)' }
 
   def save
     # オーダー情報の保存

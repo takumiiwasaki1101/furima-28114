@@ -60,7 +60,6 @@ RSpec.describe Transaction, type: :model do
       # idが0の場合は登録できないことを確認
 
       # 郵便番号にはハイフンが必要であること
-
     end
   end
 end

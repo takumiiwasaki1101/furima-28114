@@ -14,6 +14,12 @@ RSpec.describe Transaction, type: :model do
 
     context '購入失敗時' do
       # 空では登録できないことを確認
+      it 'tokenが空では登録できないこと' do
+        @transaction.token = nil
+        @transaction.valid?
+        expect(@transaction.errors.full_messages).to include("Token can't be blank")
+      end
+
       it 'postal_codeが空では登録できないこと' do
         @transaction.postal_code = nil
         @transaction.valid?

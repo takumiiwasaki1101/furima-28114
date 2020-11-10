@@ -6,7 +6,7 @@ class Transaction
   ## 入力必須に関するvalidation
   with_options presence: true do
     validates :token
-    validates :postal_code
+    validates :postal_code, format: { with: /\A[0-9]{3}-[0-9]{4}\z/, message: 'is invalid. Include hyphen(-)' }
     validates :prefecture_id
     validates :city
     validates :block
@@ -17,9 +17,6 @@ class Transaction
   with_options numericality: { other_than: 0, message: 'Select' } do
     validates :prefecture_id
   end
-
-  ## postal_codeに関するバリデーション
-  validates :postal_code, format: { with: /\A[0-9]{3}-[0-9]{4}\z/, message: 'is invalid. Include hyphen(-)' }
 
   def save
     # オーダー情報の保存

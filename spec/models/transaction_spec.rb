@@ -7,7 +7,12 @@ RSpec.describe Transaction, type: :model do
     end
 
     context '購入成功時' do
-      it '全ての値が正しく入力されていれば購入ができること' do
+      it '全ての値が正しく入力されていれば購入処理ができること' do
+        expect(@transaction).to be_valid
+      end
+
+      it '建物名は空でも購入処理ができること' do
+        @transaction.building = nil
         expect(@transaction).to be_valid
       end
     end

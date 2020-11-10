@@ -10,7 +10,7 @@ class Transaction
     validates :prefecture_id
     validates :city
     validates :block
-    validates :telephone_number, numericality: { with: /\A[0-9]+\z/, message: 'Half-width number' }
+    validates :telephone_number, format: { with: /\A[0-9]{,11}\z/, message: 'is too long (maximum is 11 characters)' }
   end
 
   ## id0以外での入力を必須とするvalidation

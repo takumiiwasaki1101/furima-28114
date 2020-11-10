@@ -10,7 +10,8 @@ class OrdersController < ApplicationController
   def create
     @item = Item.find(params[:item_id])
     @transaction = Transaction.new(order_params)
-      if @transaction.valid?
+    binding.pry
+    if @transaction.valid?
         @transaction.save
         redirect_to root_path
       else
@@ -21,7 +22,7 @@ class OrdersController < ApplicationController
   private
 
   def order_params
-    params.require(:transaction).permit(:postal_code, :prefecture_id, :city, :block, :building, :telephone_number, :order_id).merge(user_id: current_user.id, item_id: params[:item_id])
+    params.require(:transaction).permit(:postal_code, :prefecture_id, :city, :block, :building, :telephone_number, :order_id).merge(user_id: current_user.id, item_id: params[:item_id],token: params[:token])
   end
 
   def move_to_index

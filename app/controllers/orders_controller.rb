@@ -4,12 +4,10 @@ class OrdersController < ApplicationController
   before_action :set_item, only: [:index, :create]
 
   def index
-    set_item
     @transaction = Transaction.new
   end
 
   def create
-    set_item
     @transaction = Transaction.new(order_params)
     if @transaction.valid?
       pay_item
@@ -31,7 +29,7 @@ class OrdersController < ApplicationController
     if @item.order
       redirect_to root_path
     elsif current_user.id == @item.user_id
-      redirect_to root_path
+      redirect_to root_path  
     end
   end
 

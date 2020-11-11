@@ -9,6 +9,7 @@ class Item < ApplicationRecord
   # Association
   belongs_to :user
   has_one_attached :image
+  has_one :order
 
   # Validation
   ## 入力必須に関するvalidation
